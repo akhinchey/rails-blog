@@ -2,6 +2,8 @@ class CommentsController < ApplicationController
 
   skip_before_filter  :verify_authenticity_token
 
+  http_basic_authenticate_with name: "Amanda", password: "password", only: :destroy
+
   def create
     @article = Article.find(params[:article_id])
     @comment = @article.comments.create(comment_params)
